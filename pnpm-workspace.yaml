@@ -1,0 +1,3 @@
+nodeLinker: hoisted
+symlink: false
+packageImportMethod: copy
