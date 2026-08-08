@@ -14,7 +14,11 @@ const CustomText = ({
 }: CustomTextProps) => {
 	return (
 		<Text
-			style={[typography[variant], style, { color: colors[color] }]}
+			style={[
+				typography[variant],
+				style,
+				color ? { color: colors[color] } : null,
+			]}
 			{...props}
 		/>
 	);

@@ -1,56 +1,174 @@
-# Welcome to your Expo app 👋
+# Workout App — DCIT 324 Assignment 2
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Reusable Components with Props and State**
 
-## Get started
+A fitness app built with **React Native** and **Expo** that displays a list of workouts and a details screen for each one. The app demonstrates reusable components driven by **props** and interactive elements driven by **state**.
 
-1. Install dependencies
+Built for the DCIT 324: Mobile Application Development course at the **University of Ghana**, based on the [Free Fitness App UI Kit](https://www.figma.com/community/file/1091263687486055207/free-fitness-app-ui-kit) reference design on Figma.
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+## 📱 Screenshots
 
-   ```bash
-   npx expo start
-   ```
+> Add your screenshots to the `screenshots/` folder and reference them below by replacing the placeholder paths.
 
-In the output, you'll find options to open the app in a
+|                 Workout List Screen                  |                   Workout Details Screen                   |
+| :--------------------------------------------------: | :--------------------------------------------------------: |
+| ![Workout List Screen](screenshots/workout-list.png) | ![Workout Details Screen](screenshots/workout-details.png) |
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+_Placeholder:_ save your screenshots as `screenshots/workout-list.png` and `screenshots/workout-details.png`, or update the paths above.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## ✨ Features
 
-When you're ready, run:
+- **Reusable Workout Card component** — one `Card` component receives its image, title, duration, and calorie information through **props**, so no card markup is repeated.
+- **Workout List screen** — renders **six workout cards** by mapping over an array of workout data from `src/data/workouts.ts`.
+- **Favourite button** — a heart icon on every card toggles between filled and unfilled using **state**, independently for each card.
+- **Stack navigation** — tapping a card opens the **Workout Details** screen, passing the selected workout's data through **route params**.
+- **Start / Completed toggle** — a button on the details screen toggles between **"Start Workout"** and **"Completed"** using state.
+- **Simple, clean design** — flat colours, simple icons, shared theme and typography constants.
 
-```bash
-npm run reset-project
+---
+
+## 🛠 Tech Stack
+
+| Layer          | Technology                                                                              |
+| :------------- | :-------------------------------------------------------------------------------------- |
+| Framework      | [Expo](https://expo.dev) (SDK 57)                                                       |
+| UI             | [React Native](https://reactnative.dev) (0.86)                                          |
+| Language       | [TypeScript](https://www.typescriptlang.org) (strict mode)                              |
+| Navigation     | [Expo Router](https://docs.expo.dev/router/introduction/) (file-based, stack navigator) |
+| Icons          | [react-native-heroicons](https://www.npmjs.com/package/react-native-heroicons)          |
+| List rendering | React Native `FlatList`                                                                 |
+
+---
+
+## 📁 Project Structure
+
+```
+.
+├── assets/                      # Icons, splash screen and app icon images
+├── src/
+│   ├── app/
+│   │   ├── _layout.tsx          # Root stack navigator (header config)
+│   │   ├── index.tsx            # Workout List screen
+│   │   └── work-details.tsx     # Workout Details screen
+│   ├── components/
+│   │   ├── Card.tsx             # Reusable workout card (props + favourite state)
+│   │   └── custom/
+│   │       └── CustomText.tsx   # Reusable text component (typography/colour props)
+│   ├── constants/
+│   │   └── theme.ts             # Colour palette and typography tokens
+│   └── data/
+│       └── workouts.ts          # Workout data array + Workout type
+├── app.json                     # Expo configuration
+├── package.json
+└── tsconfig.json                # TS config with "@/" path alias → ./src
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-### Other setup steps
+## 🚀 Getting Started
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+### Prerequisites
 
-## Learn more
+- [Node.js](https://nodejs.org) (LTS recommended)
+- An Android emulator, iOS simulator, or the [Expo Go](https://expo.dev/go) app on your phone
+- (Optional) Yarn or pnpm — the project ships with `pnpm-lock.yaml`
 
-To learn more about developing your project with Expo, look at the following resources:
+### Installation
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+# 1. Install dependencies
+npm install
 
-## Join the community
+# 2. Start the Expo dev server
+npx expo start
+```
 
-Join our community of developers creating universal apps.
+### Running the app
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+From the Expo dev server output, you can:
+
+- Press **`a`** to open on an Android emulator
+- Press **`i`** to open on an iOS simulator
+- Press **`w`** to open in the browser
+- Scan the QR code with the **Expo Go** app on your physical device
+
+---
+
+## 🧭 Screens & Navigation
+
+### Workout List (`src/app/index.tsx`)
+
+- Displays the "WorkOuts" heading and a `FlatList` of six workouts.
+- Each row is rendered with the reusable `Card` component:
+
+```tsx
+<Card
+  onPress={() => handlePress(item)}
+  image={item.image}
+  title={item.title}
+  calorie={item.calories}
+  duration={item.duration}
+/>
+```
+
+- Tapping the heart icon on a card toggles its own favourite state without affecting other cards.
+- Tapping the card navigates to the details screen:
+
+```tsx
+router.push({ pathname: "/work-details", params: { id: item.id } });
+```
+
+### Workout Details (`src/app/work-details.tsx`)
+
+- Reads the selected workout's `id` from route params via `useLocalSearchParams`.
+- Shows a large image, title, duration, calories, description, and a list of exercises.
+- The footer button toggles between **"Start Workout"** and **"✓ Completed"** using local state.
+
+### Reusable Card (`src/components/Card.tsx`)
+
+| Prop       | Type                            | Description                    |
+| :--------- | :------------------------------ | :----------------------------- |
+| `image`    | `ImageSourcePropType \| string` | Workout image (URI or require) |
+| `title`    | `string`                        | Workout title                  |
+| `duration` | `number`                        | Duration in minutes            |
+| `calorie`  | `number`                        | Calories burned                |
+| `onPress`  | `() => void`                    | Called when the card is tapped |
+
+---
+
+## ✅ Assignment Requirements
+
+|  #  | Requirement                                              | Implementation                               |
+| :-: | :------------------------------------------------------- | :------------------------------------------- |
+|  1  | Set up a new Expo project                                | Expo project with file-based routing         |
+|  2  | Reusable workout card component (props)                  | `src/components/Card.tsx`                    |
+|  3  | List screen rendering ≥ 6 cards by mapping over data     | `src/app/index.tsx` + `src/data/workouts.ts` |
+|  4  | Favourite icon toggling with state, independent per card | `useState` in `Card.tsx`                     |
+|  5  | Stack navigator, card → details with route params        | Expo Router `<Stack>` + `router.push`        |
+|  6  | Start Workout / Completed toggle button                  | `useState` in `work-details.tsx`             |
+|  7  | Simple clean design, flat colours, simple icons          | `src/constants/theme.ts`                     |
+
+---
+
+## 📝 Notes
+
+- Workout images are currently loaded from **Unsplash** URLs defined in `src/data/workouts.ts`. You can replace them with local images in `assets/` by changing the `image` field to a `require()` call.
+- The design follows the reference Figma kit for structure and colour only.
+
+---
+
+## 📦 Submission
+
+1. Push this project to a GitHub repository.
+2. On GitHub, click **Code → Download ZIP**.
+3. Submit the downloaded ZIP on **Sakai** under this assignment.
+
+---
+
+## 📄 License
+
+This project is for academic purposes as part of DCIT 324 at the University of Ghana.

@@ -1,12 +1,12 @@
 import { colors } from "@/constants/theme";
 import { useState } from "react";
 import {
-    Image,
-    type ImageSourcePropType,
-    StyleSheet,
-    TouchableOpacity,
-    View,
-    type ViewProps,
+	Image,
+	type ImageSourcePropType,
+	StyleSheet,
+	TouchableOpacity,
+	View,
+	type ViewProps,
 } from "react-native";
 import { HeartIcon as HeartIconOutline } from "react-native-heroicons/outline";
 import { HeartIcon as HeartIconSolid } from "react-native-heroicons/solid";
@@ -28,11 +28,19 @@ const Card = ({
 	onPress,
 }: CardProps) => {
 	const [isFavourite, setFavourite] = useState(false);
+	// React Native's <Image> requires { uri } objects — plain string URLs only
+	// work on web, so convert strings before passing them as the source.
+	const source =
+		typeof image === "string" ? { uri: image } : (image as ImageSourcePropType);
 
 	return (
 		<TouchableOpacity onPress={onPress}>
 			<View style={styles.container}>
-				<Image style={styles.image} source={image as ImageSourcePropType} />
+				<Image
+					style={styles.image}
+					source={source}
+					resizeMode="cover"
+				/>
 				<View
 					style={{
 						width: 180,
@@ -99,6 +107,5 @@ const styles = StyleSheet.create({
 		width: "30%",
 		height: "100%",
 		borderRadius: 12,
-		resizeMode: "cover",
 	},
 });
