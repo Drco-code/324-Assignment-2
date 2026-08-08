@@ -12,9 +12,9 @@ Built for the DCIT 324: Mobile Application Development course at the **Universit
 
 > Add your screenshots to the `screenshots/` folder and reference them below by replacing the placeholder paths.
 
-|                 Workout List Screen                  |                   Workout Details Screen                   |
-| :--------------------------------------------------: | :--------------------------------------------------------: |
-| ![Workout List Screen](screenshots/workout-list.png) | ![Workout Details Screen](screenshots/workout-details.png) |
+|                 Workout List Screen                 |                 Workout Details Screen                 |
+| :-------------------------------------------------: | :----------------------------------------------------: |
+| ![Workout List Screen](./assets/screenshots/1.jpeg) | ![Workout Details Screen](./assets/screenshots/2.jpeg) |
 
 _Placeholder:_ save your screenshots as `screenshots/workout-list.png` and `screenshots/workout-details.png`, or update the paths above.
 
