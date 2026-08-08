@@ -43,3 +43,4 @@ example
 /android
 CLAUDE.md
 AGENTS.md
+.claude/settings.json
