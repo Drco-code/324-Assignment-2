@@ -1,10 +1,16 @@
 import Card from "@/components/Card";
 import CustomText from "@/components/custom/CustomText";
-import { workouts } from "@/data/workouts";
+import { type Workout, workouts } from "@/data/workouts";
+import { useRouter } from "expo-router";
 import { FlatList, ScrollView, StyleSheet, View } from "react-native";
 
 export default function Index() {
-	const imageSource = require("../../assets/workout-images/image 27.png");
+	const router = useRouter();
+	// const imageSource = require("../../assets/workout-images/image 27.png");
+
+	const handlePress = (item: Workout) => {
+		router.push({ pathname: "/work-details", params: { id: item.id } });
+	};
 
 	return (
 		<ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
@@ -25,6 +31,7 @@ export default function Index() {
 				keyExtractor={(item) => item.id}
 				renderItem={({ item }) => (
 					<Card
+						onPress={() => handlePress(item)}
 						image={item.image}
 						title={item.title}
 						calorie={item.calories}

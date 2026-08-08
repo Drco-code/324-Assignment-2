@@ -76,7 +76,8 @@ export const workouts: Workout[] = [
     duration: 15,
     calories: 120,
     category: "Yoga",
-    image: "https://images.unsplash.com/photo-1510894347719-fc3d9f7c4e3d?w=800",
+    image:
+      "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80",
     description:
       "Relax and recover with a gentle stretching session for your entire body.",
     exercises: [

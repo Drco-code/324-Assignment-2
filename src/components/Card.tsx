@@ -1,5 +1,4 @@
 import { colors } from "@/constants/theme";
-import type { Href } from "expo-router";
 import { useState } from "react";
 import {
     Image,
@@ -18,7 +17,7 @@ interface CardProps extends ViewProps {
 	title?: string;
 	duration?: number;
 	calorie?: number;
-	href?: Href;
+	onPress?: () => void;
 }
 
 const Card = ({
@@ -26,11 +25,12 @@ const Card = ({
 	title = "Workout Now",
 	duration = 0,
 	calorie = 0,
+	onPress,
 }: CardProps) => {
 	const [isFavourite, setFavourite] = useState(false);
 
 	return (
-		<TouchableOpacity>
+		<TouchableOpacity onPress={onPress}>
 			<View style={styles.container}>
 				<Image style={styles.image} source={image as ImageSourcePropType} />
 				<View
@@ -56,7 +56,7 @@ const Card = ({
 							{duration} min
 						</CustomText>
 						<CustomText variant="button" color="textSecondary">
-							.
+							•
 						</CustomText>
 						<CustomText variant="button" color="textSecondary">
 							{calorie} kcal
