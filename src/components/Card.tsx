@@ -9,6 +9,8 @@ import {
     View,
     type ViewProps,
 } from "react-native";
+import { HeartIcon as HeartIconOutline } from "react-native-heroicons/outline";
+import { HeartIcon as HeartIconSolid } from "react-native-heroicons/solid";
 import CustomText from "./custom/CustomText";
 
 interface CardProps extends ViewProps {
@@ -30,13 +32,19 @@ const Card = ({
 	return (
 		<TouchableOpacity>
 			<View style={styles.container}>
-				<Image
-					style={styles.image}
-					source={image as ImageSourcePropType}
-					// resizeMode="cover"
-				/>
-				<View style={{ paddingVertical: 15, paddingHorizontal: 8, gap: 10 }}>
-					<CustomText variant="heading2">{title}</CustomText>
+				<Image style={styles.image} source={image as ImageSourcePropType} />
+				<View
+					style={{
+						width: 180,
+						paddingVertical: 15,
+						paddingHorizontal: 8,
+						gap: 10,
+						alignItems: "center",
+					}}
+				>
+					<CustomText numberOfLines={2} variant="heading3">
+						{title}
+					</CustomText>
 					<View
 						style={{
 							flexDirection: "row",
@@ -55,6 +63,20 @@ const Card = ({
 						</CustomText>
 					</View>
 				</View>
+				<TouchableOpacity
+					style={{
+						justifyContent: "center",
+						alignSelf: "center",
+						paddingLeft: 20,
+					}}
+					onPress={() => setFavourite(!isFavourite)}
+				>
+					{isFavourite ? (
+						<HeartIconSolid color={colors.iconActive} />
+					) : (
+						<HeartIconOutline />
+					)}
+				</TouchableOpacity>
 			</View>
 		</TouchableOpacity>
 	);
@@ -69,8 +91,9 @@ const styles = StyleSheet.create({
 		borderRadius: 12,
 		height: 90,
 		flexDirection: "row",
-		alignSelf: "stretch",
+		// alignSelf: "stretch",
 		marginVertical: 10,
+		alignItems: "flex-start",
 	},
 	image: {
 		width: "30%",

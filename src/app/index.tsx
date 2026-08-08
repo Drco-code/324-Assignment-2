@@ -23,7 +23,14 @@ export default function Index() {
 				style={styles.list}
 				data={workouts}
 				keyExtractor={(item) => item.id}
-				renderItem={({ item }) => <Card image={item.image} />}
+				renderItem={({ item }) => (
+					<Card
+						image={item.image}
+						title={item.title}
+						calorie={item.calories}
+						duration={item.duration}
+					/>
+				)}
 				showsVerticalScrollIndicator={false}
 			/>
 		</ScrollView>
